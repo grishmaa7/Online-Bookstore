@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨Starry Books - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #202A44;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Hero Section */
+        .carousel-item img {
+            height: 800px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Featured Books */
+        .book-card {
+            background-color: #1b2338;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .book-card img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .text-warning {
+            color: #FFD700 !important;
+            font-weight: bold;
+        }
+
+        .btn-add-to-cart {
+            background-color: #FFD700;
+            color: #202A44;
+            border: none;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .btn-add-to-cart:hover {
+            background-color: #e6c200;
+        }
+    </style>
+</head>
+
+<body>
+   
+
+
+    <!-- Navbar -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Hero Section -->
+    <div id="heroCarousel" class="carousel slide container my-4" data-bs-ride="carousel" data-bs-interval="2000"
+        style="border-radius: 10px;">
+        <div class="carousel-inner position-relative">
+            <div class="carousel-item active">
+                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794" class="d-block w-100 blur-bg"
+                    alt="Books Hero 1">
+            </div>
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f" class="d-block w-100 blur-bg"
+                    alt="Books Hero 2">
+            </div>
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66" class="d-block w-100 blur-bg"
+                    alt="Books Hero 3">
+            </div>
+    
+            <!-- Overlay text -->
+            <div class="carousel-caption d-flex flex-column justify-content-center align-items-center text-center"
+                style="top:0; bottom:0;">
+                <h1 class="display-4 text-warning fw-bold">Welcome to Starry Books</h1>
+                <p class="fs-4 text-white">“Read More, Explore More, Dream More”</p>
+            </div>
+        </div>
+    
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    
+    <style>
+        /* Make hero bigger and blur background images */
+        #heroCarousel {
+            height: 500px;
+            /* bigger height */
+        }
+    
+        #heroCarousel .carousel-inner {
+            height: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+    
+        .blur-bg {
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7) blur(2px);
+            /* slightly dark + blurry */
+        }
+    
+        .carousel-caption h1 {
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+        }
+    
+        .carousel-caption p {
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+        }
+    </style>
+        </div>
+       
+
+    <!-- Featured Books Section -->
+    <div class="container my-5">
+        <h2 class="text-warning mb-4">Featured Books✨</h2>
+        <div class="row g-4" id="book-list">
+            <!-- JS will generate book cards here -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- JS -->
+    <script>
+       const books = [
+            { id: 1, title: "The Great Gatsby", author: "F. Scott Fitzgerald", price: "$12.99", img: "https://covers.openlibrary.org/b/id/295577-L.jpg" },
+            { id: 2, title: "1984", author: "George Orwell", price: "$9.99", img: "https://covers.openlibrary.org/b/id/7222246-L.jpg" },
+            { id: 3, title: "To Kill a Mockingbird", author: "Harper Lee", price: "$11.99", img: "https://covers.openlibrary.org/b/id/8228691-L.jpg" },
+            { id: 4, title: "Pride and Prejudice", author: "Jane Austen", price: "$10.50", img: "https://covers.openlibrary.org/b/id/8091016-L.jpg" },
+            { id: 5, title: "Harry Potter and the Sorcerer's Stone", author: "J.K. Rowling", price: "$15.99", img: "https://covers.openlibrary.org/b/id/7984916-L.jpg" },
+            { id: 6, title: "The Hobbit", author: "J.R.R. Tolkien", price: "$14.99", img: "https://covers.openlibrary.org/b/id/6979861-L.jpg" },
+            { id: 7, title: "Moby Dick", author: "Herman Melville", price: "$13.99", img: "https://covers.openlibrary.org/b/id/8100904-L.jpg" },
+            { id: 8, title: "War and Peace", author: "Leo Tolstoy", price: "$16.99", img: "https://covers.openlibrary.org/b/id/8231996-L.jpg" },
+            { id: 9, title: "The Catcher in the Rye", author: "J.D. Salinger", price: "$10.99", img: "https://covers.openlibrary.org/b/id/8225265-L.jpg" },
+            { id: 10, title: "The Lord of the Rings", author: "J.R.R. Tolkien", price: "$25.99", img: "https://covers.openlibrary.org/b/id/8231852-L.jpg" },
+            { id: 11, title: "Jane Eyre", author: "Charlotte Bronte", price: "$12.50", img: "https://covers.openlibrary.org/b/id/8231992-L.jpg" },
+            { id: 12, title: "Brave New World", author: "Aldous Huxley", price: "$11.99", img: "https://covers.openlibrary.org/b/id/8772194-L.jpg" },
+            { id: 13, title: "The Alchemist", author: "Paulo Coelho", price: "$10.99", img: "https://covers.openlibrary.org/b/id/8235040-L.jpg" },
+            { id: 14, title: "Anna Karenina", author: "Leo Tolstoy", price: "$14.50", img: "https://covers.openlibrary.org/b/id/8231995-L.jpg" },
+            { id: 15, title: "Crime and Punishment", author: "Fyodor Dostoevsky", price: "$13.50", img: "https://covers.openlibrary.org/b/id/8231997-L.jpg" },
+            { id: 16, title: "The Odyssey", author: "Homer", price: "$12.00", img: "https://covers.openlibrary.org/b/id/8231998-L.jpg" },
+            { id: 17, title: "Les Miserables", author: "Victor Hugo", price: "$17.00", img: "https://covers.openlibrary.org/b/id/8232000-L.jpg" },
+            { id: 18, title: "Wuthering Heights", author: "Emily Bronte", price: "$11.50", img: "https://covers.openlibrary.org/b/id/8232002-L.jpg" },
+            { id: 19, title: "The Divine Comedy", author: "Dante Alighieri", price: "$15.00", img: "https://covers.openlibrary.org/b/id/8232004-L.jpg" },
+            { id: 20, title: "The Kite Runner", author: "Khaled Hosseini", price: "$12.99", img: "https://covers.openlibrary.org/b/id/8232006-L.jpg" },
+            { id: 21, title: "The Book Thief", author: "Markus Zusak", price: "$13.99", img: "https://covers.openlibrary.org/b/id/8232008-L.jpg" },
+            { id: 22, title: "Animal Farm", author: "George Orwell", price: "$9.50", img: "https://covers.openlibrary.org/b/id/8232010-L.jpg" },
+            { id: 23, title: "Dracula", author: "Bram Stoker", price: "$10.99", img: "https://covers.openlibrary.org/b/id/8232012-L.jpg" },
+            { id: 24, title: "Frankenstein", author: "Mary Shelley", price: "$11.50", img: "https://covers.openlibrary.org/b/id/8232014-L.jpg" },
+            { id: 25, title: "The Little Prince", author: "Antoine de Saint-Exupéry", price: "$8.99", img: "https://covers.openlibrary.org/b/id/8232016-L.jpg" },
+            { id: 26, title: "A Tale of Two Cities", author: "Charles Dickens", price: "$12.50", img: "https://covers.openlibrary.org/b/id/8232018-L.jpg" },
+            { id: 27, title: "The Chronicles of Narnia", author: "C.S. Lewis", price: "$18.99", img: "https://covers.openlibrary.org/b/id/8232020-L.jpg" },
+            { id: 28, title: "The Hunger Games", author: "Suzanne Collins", price: "$14.50", img: "https://covers.openlibrary.org/b/id/8232022-L.jpg" },
+            { id: 29, title: "Catching Fire", author: "Suzanne Collins", price: "$14.50", img: "https://covers.openlibrary.org/b/id/8232024-L.jpg" },
+            { id: 30, title: "Mockingjay", author: "Suzanne Collins", price: "$14.50", img: "https://covers.openlibrary.org/b/id/8232026-L.jpg" }
+        ];
+
+        const bookList = document.getElementById('book-list');
+
+        books.forEach(book => {
+            const card = document.createElement('div');
+            card.classList.add('col-md-3');
+            card.innerHTML = `
+        <div class="book-card" data-id="${book.id}">
+          <img src="${book.img}" alt="${book.title}">
+          <h5 class="mt-2">${book.title}</h5>
+          <p class="text-warning">${book.price}</p>
+          <button class="btn-add-to-cart w-100">Book Details</button>
+        </div>
+      `;
+            card.querySelector('.book-card').addEventListener('click', () => {
+                window.location.href = `book-details.html?id=${book.id}`;
+            });
+            bookList.appendChild(card);
+        });
+
+        // Load navbar and footer
+        function loadHTML(id, file) {
+            fetch(file).then(res => res.text()).then(data => document.getElementById(id).innerHTML = data);
+        }
+        loadHTML('navbar-placeholder', 'navbar.html');
+        loadHTML('footer-placeholder', 'footer.html');
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

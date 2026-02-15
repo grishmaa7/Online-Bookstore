@@ -1,0 +1,201 @@
+/* ===== Global Styles ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #202A44;
+    /* page background */
+    color: #fff;
+    line-height: 1.6;
+}
+
+/* ===== Container Fix ===== */
+.container,
+.container-fluid {
+    background-color: #202A44;
+    /* remove white from container */
+}
+
+/* ===== Navbar ===== */
+.navbar {
+    background-color: #202A44 !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    color: #FFD700 !important;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    color: #FFD700 !important;
+    margin-left: 15px;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #fff !important;
+    transform: translateY(-2px);
+    text-shadow: 0 0 6px #FFD700;
+}
+
+/* ===== Buttons ===== */
+.btn-primary,
+.btn-success,
+.btn-add-to-cart {
+    background-color: #FFD700;
+    /* all yellow buttons */
+    border: none;
+    color: #202A44;
+    font-weight: 600;
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary:hover,
+.btn-success:hover,
+.btn-add-to-cart:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(255, 215, 0, 0.5);
+}
+
+.btn-primary::after,
+.btn-success::after,
+.btn-add-to-cart::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: -100%;
+    background: rgba(255, 215, 0, 0.2);
+    transition: left 0.4s;
+    z-index: 0;
+    border-radius: 8px;
+}
+
+.btn-primary:hover::after,
+.btn-success:hover::after,
+.btn-add-to-cart:hover::after {
+    left: 0;
+}
+
+/* ===== Forms ===== */
+input,
+textarea {
+    background-color: #1B2238;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 10px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #FFD700;
+    box-shadow: 0 0 10px #FFD70044;
+}
+
+/* ===== Cards ===== */
+.card,
+.book-card {
+    background-color: #1B2238;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+}
+
+.card:hover,
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.5);
+    background-color: #242f55;
+}
+
+/* Book images */
+.book-card img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.book-card img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.7);
+}
+
+/* ===== Headings ===== */
+h2,
+h4,
+h5 {
+    color: #FFD700;
+    font-weight: 600;
+}
+
+/* ===== Links ===== */
+a {
+    color: #FFD700;
+    text-decoration: none;
+    transition: color 0.3s, transform 0.3s;
+}
+
+a:hover {
+    color: #fff;
+    transform: translateY(-2px);
+    text-shadow: 0 0 6px #FFD700;
+}
+
+/* ===== Footer ===== */
+footer {
+    background-color: #202A44;
+    color: #FFD700;
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+footer:hover {
+    box-shadow: 0 -6px 12px rgba(255, 215, 0, 0.4);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .book-card {
+        margin-bottom: 20px;
+    }
+}
+
+/* ===== Animations ===== */
+.book-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

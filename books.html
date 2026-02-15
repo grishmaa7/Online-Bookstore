@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books - Online Bookstore</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body style="background-color: #202A44; color: white;">
+
+    <!-- Navbar -->
+<div id="navbar-placeholder"></div>
+<script>
+    function loadHTML(id, file) {
+        fetch(file).then(res => res.text()).then(data => document.getElementById(id).innerHTML = data);
+    }
+    loadHTML('navbar-placeholder', 'navbar.html');
+</script>
+
+    <!-- Search & Filter Section -->
+    <section class="text-center p-4" style="background-color: #1A2036;">
+        <h2 class="text-warning">All Books✨</h2>
+    
+        <!-- Search -->
+        <input type="text" id="search-input-books" placeholder="Search books..." class="form-control w-50 mx-auto my-2">
+    
+        <!-- Price Filter -->
+        <div class="d-flex justify-content-center align-items-center gap-2 mt-2">
+            <input type="number" id="min-price" placeholder="Min Price ($)" class="form-control w-auto">
+            <input type="number" id="max-price" placeholder="Max Price ($)" class="form-control w-auto">
+            <button id="filter-price-btn" class="btn btn-warning">Filter</button>
+            <button id="reset-price-btn" class="btn btn-secondary">Reset</button>
+        </div>
+    </section>
+
+    <!-- Books Grid -->
+    <section class="books-container container my-4">
+        <div id="books" class="row g-4"></div>
+    </section>
+
+    <!-- Footer -->
+<div id="footer-placeholder"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Books JS -->
+    <script>
+ const books = [
+        { id: 1, title: "The Great Gatsby", author: "F. Scott Fitzgerald", price: "$12.99", img: "https://covers.openlibrary.org/b/id/295577-L.jpg" },
+        { id: 2, title: "1984", author: "George Orwell", price: "$9.99", img: "https://covers.openlibrary.org/b/id/7222246-L.jpg" },
+        { id: 3, title: "To Kill a Mockingbird", author: "Harper Lee", price: "$11.99", img: "https://covers.openlibrary.org/b/id/8228691-L.jpg" },
+        { id: 4, title: "Pride and Prejudice", author: "Jane Austen", price: "$10.50", img: "https://covers.openlibrary.org/b/id/8091016-L.jpg" },
+        { id: 5, title: "Harry Potter and the Sorcerer's Stone", author: "J.K. Rowling", price: "$15.99", img: "https://covers.openlibrary.org/b/id/7984916-L.jpg" },
+        { id: 6, title: "The Hobbit", author: "J.R.R. Tolkien", price: "$14.99", img: "https://covers.openlibrary.org/b/id/6979861-L.jpg" },
+        { id: 7, title: "Moby Dick", author: "Herman Melville", price: "$13.99", img: "https://covers.openlibrary.org/b/id/8100904-L.jpg" },
+        { id: 8, title: "War and Peace", author: "Leo Tolstoy", price: "$16.99", img: "https://covers.openlibrary.org/b/id/8231996-L.jpg" },
+        { id: 9, title: "The Catcher in the Rye", author: "J.D. Salinger", price: "$10.99", img: "https://covers.openlibrary.org/b/id/8225265-L.jpg" },
+        { id: 10, title: "The Lord of the Rings", author: "J.R.R. Tolkien", price: "$25.99", img: "https://covers.openlibrary.org/b/id/8231852-L.jpg" },
+        { id: 11, title: "Jane Eyre", author: "Charlotte Bronte", price: "$12.50", img: "https://covers.openlibrary.org/b/id/8231992-L.jpg" },
+        { id: 12, title: "Brave New World", author: "Aldous Huxley", price: "$11.99", img: "https://covers.openlibrary.org/b/id/8772194-L.jpg" },
+        { id: 13, title: "The Alchemist", author: "Paulo Coelho", price: "$10.99", img: "https://covers.openlibrary.org/b/id/8235040-L.jpg" },
+        { id: 14, title: "Anna Karenina", author: "Leo Tolstoy", price: "$14.50", img: "https://covers.openlibrary.org/b/id/8231995-L.jpg" },
+        { id: 15, title: "Crime and Punishment", author: "Fyodor Dostoevsky", price: "$13.50", img: "https://covers.openlibrary.org/b/id/8231997-L.jpg" },
+        { id: 16, title: "The Odyssey", author: "Homer", price: "$12.00", img: "https://covers.openlibrary.org/b/id/8231998-L.jpg" },
+        { id: 17, title: "Les Miserables", author: "Victor Hugo", price: "$17.00", img: "https://covers.openlibrary.org/b/id/8232000-L.jpg" },
+        { id: 18, title: "Wuthering Heights", author: "Emily Bronte", price: "$11.50", img: "https://covers.openlibrary.org/b/id/8232002-L.jpg" },
+        { id: 19, title: "The Divine Comedy", author: "Dante Alighieri", price: "$15.00", img: "https://covers.openlibrary.org/b/id/8232004-L.jpg" },
+        { id: 20, title: "The Kite Runner", author: "Khaled Hosseini", price: "$12.99", img: "https://covers.openlibrary.org/b/id/8232006-L.jpg" },
+        { id: 21, title: "The Book Thief", author: "Markus Zusak", price: "$13.99", img: "https://covers.openlibrary.org/b/id/8232008-L.jpg" },
+        { id: 22, title: "Animal Farm", author: "George Orwell", price: "$9.50", img: "https://covers.openlibrary.org/b/id/8232010-L.jpg" },
+        { id: 23, title: "Dracula", author: "Bram Stoker", price: "$10.99", img: "https://covers.openlibrary.org/b/id/8232012-L.jpg" },
+        { id: 24, title: "Frankenstein", author: "Mary Shelley", price: "$11.50", img: "https://covers.openlibrary.org/b/id/8232014-L.jpg" },
+        { id: 25, title: "The Little Prince", author: "Antoine de Saint-Exupéry", price: "$8.99", img: "https://covers.openlibrary.org/b/id/8232016-L.jpg" },
+        { id: 26, title: "A Tale of Two Cities", author: "Charles Dickens", price: "$12.50", img: "https://covers.openlibrary.org/b/id/8232018-L.jpg" },
+        { id: 27, title: "The Chronicles of Narnia", author: "C.S. Lewis", price: "$18.99", img: "https://covers.openlibrary.org/b/id/8232020-L.jpg" },
+        { id: 28, title: "The Hunger Games", author: "Suzanne Collins", price: "$14.50", img: "https://covers.openlibrary.org/b/id/8232022-L.jpg" },
+        { id: 29, title: "Catching Fire", author: "Suzanne Collins", price: "$14.50", img: "https://covers.openlibrary.org/b/id/8232024-L.jpg" },
+        { id: 30, title: "Mockingjay", author: "Suzanne Collins", price: "$14.50", img: "https://covers.openlibrary.org/b/id/8232026-L.jpg" }
+    ];
+
+
+        const booksContainer = document.getElementById('books');
+
+        function displayBooks(bookArray) {
+            booksContainer.innerHTML = '';
+            bookArray.forEach(book => {
+                const card = document.createElement('div');
+                card.classList.add('col-md-3');
+                card.innerHTML = `
+                    <div class="card book-card p-3 h-100">
+                        <img src="${book.img}" class="card-img-top" alt="${book.title}">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-white">${book.title}</h5>
+                            <p class="card-text text-warning">${book.price}</p>
+                            <button class="btn w-100 mt-auto" style="background-color: #FFD700;">Book Details</button>
+                        </div>
+                    </div>
+                `;
+                card.querySelector('.book-card').addEventListener('click', () => {
+                    window.location.href = `book-details.html?id=${book.id}`;
+                });
+                booksContainer.appendChild(card);
+            });
+        }
+
+        displayBooks(books);
+
+        // Search Functionality
+        const searchInput = document.getElementById('search-input-books');
+        searchInput.addEventListener('input', () => {
+            const filteredBooks = books.filter(book => book.title.toLowerCase().includes(searchInput.value.toLowerCase()));
+            displayBooks(filteredBooks);
+        });
+    </script>
+    <script>
+        function loadHTML(id, file) {
+            fetch(file)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(id).innerHTML = data;
+                });
+              // Price filter
+            const minPriceInput = document.getElementById('min-price');
+            const maxPriceInput = document.getElementById('max-price');
+            const filterBtn = document.getElementById('filter-price-btn');
+            const resetBtn = document.getElementById('reset-price-btn');
+
+            filterBtn.addEventListener('click', () => {
+                const min = parseFloat(minPriceInput.value) || 0;
+                const max = parseFloat(maxPriceInput.value) || Infinity;
+
+                const filteredBooks = books.filter(book => {
+                    const price = parseFloat(book.price.replace('$', ''));
+                    return price >= min && price <= max;
+                });
+
+                displayBooks(filteredBooks);
+            });
+
+            // Reset filter
+            resetBtn.addEventListener('click', () => {
+                minPriceInput.value = '';
+                maxPriceInput.value = '';
+                displayBooks(books);
+            });
+  
+        }
+
+        // Load navbar and footer
+        loadHTML('navbar-placeholder', 'navbar.html');
+        loadHTML('footer-placeholder', 'footer.html');
+    </script>
+
+
+</body>
+
+</html>

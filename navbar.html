@@ -1,0 +1,67 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #202A44;">
+    <div class="container">
+        <a class="navbar-brand text-warning fw-bold" href="index.html">✨ Starry Books</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto" id="nav-links">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link text-warning" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="books.html">Books</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="cart.html">Cart</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<script>
+    function updateNavbar() {
+        const navLinks = document.getElementById('nav-links');
+        const user = JSON.parse(localStorage.getItem('loggedInUser')); // check logged-in user
+        navLinks.innerHTML = '';
+
+        if (user) {
+            // User is logged in → show Profile and Cart
+            navLinks.innerHTML = `
+        <li class="nav-item">
+          <a class="nav-link text-white" href="books.html">Books</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="cart.html">Cart</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-warning" href="profile.html">Profile (${user.name})</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#" id="logout-btn">Logout</a>
+        </li>
+      `;
+
+            document.getElementById('logout-btn').addEventListener('click', () => {
+                localStorage.removeItem('loggedInUser');
+                alert('Logged out successfully!');
+                updateNavbar(); // refresh navbar
+                window.location.href = 'index.html';
+            });
+
+        } else {
+            // No user → show Login and Register
+            navLinks.innerHTML = `
+        <li class="nav-item">
+          <a class="nav-link text-white" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="books.html">Books</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="login.html">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="register.html">Register</a>
+        </li>
+      `;
+        }
+    }
+    updateNavbar();
+</script>
